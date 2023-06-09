@@ -1,29 +1,5 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
-
-import { useState, useEffect } from "react";
-
-type Events = {
-  createEvent: {
-    id: string;
-    title: string;
-    description: string;
-    date: Date;
-    startHour: number;
-    endHour: number;
-  };
-};
-const query = gql`
-  query Query {
-    events {
-      id
-      title
-      description
-      date
-      startHour
-      endHour
-    }
-  }
-`;
+import { gql, useMutation } from "@apollo/client";
+import { useState } from "react";
 
 const Mutation = gql`
   mutation DeleteEvent($deleteEventId: ID!) {
@@ -38,22 +14,18 @@ const Mutation = gql`
   }
 `;
 
-const AddEvent = () => {
+const DeleteEvent = () => {
   const [mutationParams, setMutationParams] = useState<{
     id: string;
   }>({
     id: "",
   });
-  const [deleteEvent, setDeleteEvent] = useMutation<Event>(Mutation, {
-    variables: {
-      id: mutationParams.id,
-    },
-  });
+  const [deleteEvent] = useMutation(Mutation);
 
   async function deleteMyEvent(id: string) {
     await deleteEvent({
       variables: {
-        id: id,
+        deleteEventId: id,
       },
     });
     alert("Event is kaput");
@@ -85,4 +57,5 @@ const AddEvent = () => {
     </>
   );
 };
-export default AddEvent;
+
+export default DeleteEvent;

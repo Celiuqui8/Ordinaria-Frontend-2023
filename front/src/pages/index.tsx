@@ -9,13 +9,20 @@ export default function Home() {
       </Head>
       <div className="container">
         <h1>Events</h1>
-        <button className="button"><Link href={`addEvent/`}>Add event</Link></button>
-        <button className="button"><Link href={`deleteEvent/`}>Delete event</Link></button>
+        <button className="button">
+          <Link href={`addEvent/`}>Add event</Link>
+        </button>
+        <button className="button">
+          <Link href={`deleteEvent/`}>Delete event</Link>
+        </button>
+        <button className="button">
+          <Link href={`modifyEvent/`}>Modify event</Link>
+        </button>
       </div>
 
       <div className="listaEventos">
-        <ListEvents/>
+        <ListEvents />
       </div>
     </>
-  )
+  );
 }
